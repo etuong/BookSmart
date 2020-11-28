@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 
-	<groupId>com.bookSmart</groupId>
+	<groupId>com.booksmart</groupId>
 	<artifactId>BookSmart</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BookSmart</name>
