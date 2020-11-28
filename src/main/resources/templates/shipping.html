@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
 
-<head>
-  <meta charset="UTF-8">
-  <title>Book Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#03a6f3">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
+<head th:replace="fragments :: common-header"/>
 
 <body>
-  <div class="breadcrumb">
+
+<header th:replace="fragments :: navbar"/>
+
+<div class="breadcrumb">
     <div class="container">
-      <a class="breadcrumb-item" href="index.html">Home</a>
-      <span class="breadcrumb-item active">Shipping & Returns</span>
+        <a class="breadcrumb-item" th:href="@{/home}">Home</a>
+        <span class="breadcrumb-item active">Shipping & Returns</span>
     </div>
-  </div>
-  <section class="static about-sec">
+</div>
+
+<section class="static about-sec">
     <div class="container">
-      <h1>Shipping & Returns</h1>
-      <strong>What are the delivery charges?</strong>
-      <p>Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-        eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-        ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-        ratione voluptatem sequi nesciunt. Neque porro quisquam est.</p>
-      <strong>How do I return items?</strong>
-      <p>Spiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-        eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <h1>Shipping & Returns</h1>
+        <strong>What are the delivery charges?</strong>
+        <p>Perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
+            qui
+            ratione voluptatem sequi nesciunt. Neque porro quisquam est.</p>
+        <strong>How do I return items?</strong>
+        <p>Spiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
     </div>
-  </section>
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+</section>
+
+<div th:replace="fragments :: footer"/>
+
+<div th:replace="fragments :: body-bottom-scripts"/>
+
 </body>
 
 </html>
