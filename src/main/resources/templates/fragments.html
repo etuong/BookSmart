@@ -19,7 +19,7 @@
     <div class="main-menu">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" th:href="@{/home}">BookSmart</a>
+                <a class="navbar-brand" th:href="@{/}">BookSmart</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="navbar-item">
-                            <a th:href="@{/home}" class="nav-link">Home</a>
+                            <a th:href="@{/}" class="nav-link">Home</a>
                         </li>
                         <li class="navbar-item">
                             <a th:href="@{/shop}" class="nav-link">Shop</a>
@@ -40,12 +40,11 @@
                             <a th:href="@{/faq}" class="nav-link">FAQ</a>
                         </li>
                         <li class="navbar-item active">
-                            <a th:href="@{/}" class="nav-link">Login</a>
+                            <a th:href="@{/login}" class="nav-link">Login</a>
                         </li>
                     </ul>
                     <div class="cart my-2 my-lg-0">
-              <span>
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
                         <span class="quantity">3</span>
                     </div>
                 </div>
@@ -76,26 +75,25 @@
                 <div class="navigation">
                     <h4>Navigation</h4>
                     <ul>
-                        <li><a th:href="@{/home}">Home</a></li>
+                        <li><a th:href="@{/}">Home</a></li>
                         <li><a th:href="@{/about}">About Us</a></li>
-                        <li><a th:href="@{/termsConditions}">Terms and Conditions</a></li>
                         <li><a th:href="@{/shop}">Shop</a></li>
                     </ul>
                 </div>
                 <div class="navigation">
                     <h4>Help</h4>
                     <ul>
-                        <li><a th:href="@{/shipping}">Shipping & Returns</a></li>
+                        <li><a th:href="@{/terms-conditions}">Terms and Conditions</a></li>
+                        <li><a th:href="@{/return}">Shipping & Returns</a></li>
                         <li><a th:href="@{/faq}">FAQ’s</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="form">
-                    <h3>Contact us</h3>
-                    <h6>We are now offering some good discount
-                        on selected books go and shop them</h6>
-                    <form>
+                    <h3>Contact Us</h3>
+                    <h6>We are now offering some good discount. Reach out to us for more information!</h6>
+                    <form onSubmit="return processContactForm(event)">
                         <div class="row">
                             <div class="col-md-6">
                                 <input placeholder="Name" required>
@@ -104,8 +102,9 @@
                                 <input type="email" placeholder="Email" required>
                             </div>
                             <div class="col-md-12">
-                                <textarea placeholder="Message"></textarea>
+                                <textarea placeholder="Message" required></textarea>
                             </div>
+                            <h6 class="col-md-12" style="display:none;color:red" id="contact-confirmation">Thank you! We'll be in touch.</h6>
                             <div class="col-md-12">
                                 <button class="btn black">Submit</button>
                             </div>
@@ -129,6 +128,7 @@
 <div th:fragment="body-bottom-scripts">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
 </div>
 
 </body>

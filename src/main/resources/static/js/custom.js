@@ -18,7 +18,11 @@ $(document).ready(function () {
     items: 1,
     autoPlay: 3000,
     loop: true,
-
   });
-
 });
+
+function processContactForm(e) {
+  e.preventDefault();
+  $("#contact-confirmation").show("slow");
+  return false;
+}
