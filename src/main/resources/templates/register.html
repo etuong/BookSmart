@@ -19,7 +19,7 @@
         <h1>My Account / Register</h1>
         <p>To create an account please fill out the following fields.</p>
         <div class="form">
-            <form th:action="@{/newUser}" method="post">
+            <form th:action="@{/newUser}" method="post" onsubmit="return checkPasswords(this)">
                 <div class="row">
                     <div class="col-md-4">
                         <input name="username" placeholder="Enter Username" required>
@@ -36,7 +36,7 @@
                         <span class="required-star">*</span>
                     </div>
                     <div class="col-md-4">
-                        <input name="password-repeat" type="password" placeholder="Repeat Password" required>
+                        <input name="password2" type="password" placeholder="Repeat Password" required>
                         <span class="required-star">*</span>
                     </div>
                 </div>
@@ -46,15 +46,11 @@
                         <h5>Already Registered? <a th:href="@{/login}">Login here</a></h5>
                     </div>
                 </div>
-                <p th:if="${usernameExists}">
-                    <span style="color: red;">* Username already exits. Choose a different one.</span>
-                </p>
-                <p th:if="${emailExists}">
-                    <span style="color: red;">* Email already exits. Choose a different one.</span>
-                </p>
-                <p th:if="${emailSent}">
-                    <span style="color: red;"> * An email has been sent to the email address you just registered.</span>
-                </p>
+                <div style="color: red;">
+                    <p id="invalidatedPasswords"></p>
+                    <p th:if="${usernameExists}">* Username already exits. Choose a different one.</p>
+                    <p th:if="${emailExists}">* Email already exits. Choose a different one.</p>
+                </div>
             </form>
         </div>
     </div>

@@ -152,7 +152,7 @@ header .header-top .row {
 }
 
 header .main-menu {
-	padding: 40px 0;
+	padding: 30px 0;
 }
 
 header .main-menu .navbar {
@@ -185,7 +185,7 @@ header .main-menu .navbar-light .navbar-nav .navbar-item:last-child:after {
 }
 
 header .main-menu .navbar-light .navbar-nav .navbar-item.active {
-	color: #000;
+	color: #ff9700;
 }
 
 header .main-menu .navbar-light .navbar-nav .navbar-item.active:after {

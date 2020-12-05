@@ -1,6 +1,10 @@
 package com.booksmart.controller;
 
+import com.booksmart.entity.User;
+import com.booksmart.service.UserService;
+import com.booksmart.utility.MailConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,24 +19,28 @@ public class HomeController {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private MailConstructor mailConstructor;
+
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("isHomeActive", true);
         return "index";
     }
 
     @RequestMapping("/about")
-    public String about() {
+    public String about(Model model) {
+        model.addAttribute("isAboutActive", true);
         return "about";
     }
 
     @RequestMapping("/faq")
-    public String faq() {
+    public String faq(Model model) {
+        model.addAttribute("isFaqActive", true);
         return "faq";
-    }
-
-    @RequestMapping("/home")
-    public String home() {
-        return "home";
     }
 
     @RequestMapping("/product")
@@ -51,7 +59,8 @@ public class HomeController {
     }
 
     @RequestMapping("/shop")
-    public String shop() {
+    public String shop(Model model) {
+        model.addAttribute("isShopActive", true);
         return "shop";
     }
 
@@ -66,7 +75,8 @@ public class HomeController {
     }
 
     @RequestMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("isLoginActive", true);
         return "login";
     }
 
@@ -74,55 +84,35 @@ public class HomeController {
     public String newUserPost(
             HttpServletRequest request,
             @ModelAttribute("email") String userEmail,
+            @ModelAttribute("password") String password,
             @ModelAttribute("username") String username,
             Model model
     ) throws Exception {
         model.addAttribute("usernameExists", true);
         model.addAttribute("emailExists", false);
         model.addAttribute("emailSent", true);
-/*
-        if(userService.findByUsername(username) != null) {
-            model.addAttribute("usernameExists", true);
 
-            return "myAccount";
+        if (userService.findByUsername(username) != null) {
+            model.addAttribute("usernameExists", true);
+            return "register";
         }
 
-        if(userService.findByEmail(userEmail) != null) {
+        if (userService.findByEmail(userEmail) != null) {
             model.addAttribute("emailExists", true);
-
-            return "myAccount";
+            return "register";
         }
 
         User user = new User();
         user.setUsername(username);
         user.setEmail(userEmail);
+        user.setPassword(password);
+        userService.createUser(user);
 
-        String password = SecurityUtility.randomPassword();
-
-        String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
-        user.setPassword(encryptedPassword);
-
-        Role role = new Role();
-        role.setRoleId(1);
-        role.setName("ROLE_USER");
-        Set<UserRole> userRoles = new HashSet<>();
-        userRoles.add(new UserRole(user, role));
-        userService.createUser(user, userRoles);
-
-        String token = UUID.randomUUID().toString();
-        userService.createPasswordResetTokenForUser(user, token);
-
-        String appUrl = "http://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
-
-
-        SimpleMailMessage email = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, user, password);
-
+        SimpleMailMessage email = mailConstructor.constructNewUserEmail(user);
         mailSender.send(email);
 
         model.addAttribute("emailSent", "true");
 
-        model.addAttribute("orderList", user.getOrderList());
-*/
-        return "register";
+        return "login";
     }
 }

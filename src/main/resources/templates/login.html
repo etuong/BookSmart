@@ -31,7 +31,9 @@
                         <button type="submit" class="btn black">Log in</button>
                         <h5>Not Registered? <a th:href="@{/register}">Register here</a></h5>
                     </div>
-                    <span style="color: red;" th:if="${emailExists}">Incorrect username or password.</span>
+                </div>
+                <div style="color: red;">
+                    <p th:if="${emailSent}">* An email has been sent to the email address you just registered.</p>
                 </div>
             </form>
         </div>
