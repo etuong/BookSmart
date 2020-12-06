@@ -21,7 +21,7 @@
             <p th:if="${noAccount}">* No account found! Please register.</p>
         </div>
         <div class="form">
-            <form th:action="@{/loginUser}" method="post">
+            <form th:action="@{/login}" method="post">
                 <div class="row">
                     <div class="col-md-5">
                         <input name="username" placeholder="Enter Username" required>

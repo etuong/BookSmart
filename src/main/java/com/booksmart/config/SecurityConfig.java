@@ -4,7 +4,6 @@ import com.booksmart.service.impl.UserSecurityService;
 import com.booksmart.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,35 +17,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private Environment env;
-
-    @Autowired
     private UserSecurityService userSecurityService;
 
     private BCryptPasswordEncoder passwordEncoder() {
         return SecurityUtility.passwordEncoder();
     }
 
-    private static final String[] PUBLIC_MATCHERS = {
-            "/css/**",
-            "/js/**",
-            "/image/**",
-            "/",
-            "/newUser",
-            "/login"
-    };
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers(PUBLIC_MATCHERS)
-                .permitAll()
-                .anyRequest()
-                .authenticated();
+                .authorizeRequests().antMatchers("/").permitAll().and()
+                .authorizeRequests().antMatchers("/console/**").permitAll();
 
         http
                 .csrf().disable().cors().disable()
+                .headers().frameOptions().disable().and()
                 .formLogin().failureUrl("/login?error")
                 .loginPage("/login").permitAll()
                 .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

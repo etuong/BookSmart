@@ -78,18 +78,24 @@ public class HomeController {
     }
 
     @RequestMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("isLoginActive", true);
-        return "login";
+    public String login(@ModelAttribute("isPosted") boolean isPosted, Model model) {
+        if (isPosted) {
+            return index(model);
+        } else {
+            model.addAttribute("isLoginActive", true);
+            return "login";
+        }
     }
 
-    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-    public String loginUser(
-            HttpServletRequest request,
-            @ModelAttribute("password") String password,
-            @ModelAttribute("username") String username,
-            Model model) {
+    @RequestMapping("/login")
+    public String login(Model model) {
+        return index(model);
+    }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPosted(@ModelAttribute("password") String password,
+                              @ModelAttribute("username") String username,
+                              Model model) {
         User user = userService.findByUsername(username);
         if (user == null || !user.getPassword().equals(password)) {
             model.addAttribute("noAccount", true);
@@ -99,6 +105,23 @@ public class HomeController {
         model.addAttribute("hasLoggedIn", user.isHasLoggedIn());
         return "index";
     }
+
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String login(
+//            HttpServletRequest request,
+//            @ModelAttribute("password") String password,
+//            @ModelAttribute("username") String username,
+//            Model model) {
+//
+//        User user = userService.findByUsername(username);
+//        if (user == null || !user.getPassword().equals(password)) {
+//            model.addAttribute("noAccount", true);
+//            return "login";
+//        }
+//
+//        model.addAttribute("hasLoggedIn", user.isHasLoggedIn());
+//        return "index";
+//    }
 
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)
     public String newUserPost(
