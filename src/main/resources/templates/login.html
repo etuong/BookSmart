@@ -16,8 +16,12 @@
     <div class="container">
         <h1>My Account / Login</h1>
         <p>BookSmart is your one stop shopping website. To proceed, please log in or create an account.</p>
+        <div style="color: red;">
+            <p th:if="${emailSent}">* An email has been sent to the email address you just registered.</p>
+            <p th:if="${noAccount}">* No account found! Please register.</p>
+        </div>
         <div class="form">
-            <form th:action="@{/login}" method="post">
+            <form th:action="@{/loginUser}" method="post">
                 <div class="row">
                     <div class="col-md-5">
                         <input name="username" placeholder="Enter Username" required>
@@ -31,9 +35,6 @@
                         <button type="submit" class="btn black">Log in</button>
                         <h5>Not Registered? <a th:href="@{/register}">Register here</a></h5>
                     </div>
-                </div>
-                <div style="color: red;">
-                    <p th:if="${emailSent}">* An email has been sent to the email address you just registered.</p>
                 </div>
             </form>
         </div>

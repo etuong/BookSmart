@@ -18,6 +18,11 @@
     <div class="container">
         <h1>My Account / Register</h1>
         <p>To create an account please fill out the following fields.</p>
+        <div style="color: red;">
+            <p id="invalidatedPasswords"></p>
+            <p th:if="${usernameExists}">* Username already exits. Choose a different one.</p>
+            <p th:if="${emailExists}">* Email already exits. Choose a different one.</p>
+        </div>
         <div class="form">
             <form th:action="@{/newUser}" method="post" onsubmit="return checkPasswords(this)">
                 <div class="row">
@@ -42,14 +47,9 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
-                        <button class="btn black">Register</button>
+                        <button type="submit" class="btn black">Register</button>
                         <h5>Already Registered? <a th:href="@{/login}">Login here</a></h5>
                     </div>
-                </div>
-                <div style="color: red;">
-                    <p id="invalidatedPasswords"></p>
-                    <p th:if="${usernameExists}">* Username already exits. Choose a different one.</p>
-                    <p th:if="${emailExists}">* Email already exits. Choose a different one.</p>
                 </div>
             </form>
         </div>

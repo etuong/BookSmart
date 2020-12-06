@@ -4,8 +4,6 @@ import com.booksmart.entity.User;
 import com.booksmart.service.UserService;
 import com.booksmart.utility.MailConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 public class HomeController {
-    @Autowired
-    private JavaMailSender mailSender;
-
     @Autowired
     private MailConstructor mailConstructor;
 
@@ -74,10 +70,34 @@ public class HomeController {
         return "checkout";
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        System.out.println(principal.getName());
+        return null;
+    }
+
     @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("isLoginActive", true);
         return "login";
+    }
+
+    @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
+    public String loginUser(
+            HttpServletRequest request,
+            @ModelAttribute("password") String password,
+            @ModelAttribute("username") String username,
+            Model model) {
+
+        User user = userService.findByUsername(username);
+        if (user == null || !user.getPassword().equals(password)) {
+            model.addAttribute("noAccount", true);
+            return "login";
+        }
+
+        model.addAttribute("hasLoggedIn", user.isHasLoggedIn());
+        return "index";
     }
 
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)
@@ -88,9 +108,9 @@ public class HomeController {
             @ModelAttribute("username") String username,
             Model model
     ) throws Exception {
-        model.addAttribute("usernameExists", true);
+        model.addAttribute("usernameExists", false);
         model.addAttribute("emailExists", false);
-        model.addAttribute("emailSent", true);
+        model.addAttribute("emailSent", false);
 
         if (userService.findByUsername(username) != null) {
             model.addAttribute("usernameExists", true);
@@ -106,12 +126,16 @@ public class HomeController {
         user.setUsername(username);
         user.setEmail(userEmail);
         user.setPassword(password);
+        user.setHasLoggedIn(true);
         userService.createUser(user);
 
-        SimpleMailMessage email = mailConstructor.constructNewUserEmail(user);
-        mailSender.send(email);
+        StringBuilder messageBuilder = new StringBuilder();
+        messageBuilder.append("Thank you for registering to BookSmart\r\n");
+        messageBuilder.append("Your Username is " + user.getUsername() + "\r\n");
+        messageBuilder.append("Your Password is " + user.getPassword() + "\r\n");
+        MailConstructor.sendMail(user.getEmail(), "BookSmart - New User", messageBuilder.toString(), false);
 
-        model.addAttribute("emailSent", "true");
+        model.addAttribute("emailSent", true);
 
         return "login";
     }
