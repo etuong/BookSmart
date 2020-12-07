@@ -162,6 +162,7 @@ header .main-menu .navbar {
 header .main-menu .navbar-brand {
 	padding: 0;
 	margin-top: -10px;
+	color: #ff9700;
 }
 
 header .main-menu .navbar-light .navbar-nav .navbar-item {
@@ -184,7 +185,7 @@ header .main-menu .navbar-light .navbar-nav .navbar-item:last-child:after {
 	display: none;
 }
 
-header .main-menu .navbar-light .navbar-nav .navbar-item.active {
+header .main-menu .navbar-light .navbar-nav .navbar-item.active .nav-link  {
 	color: #ff9700;
 }
 

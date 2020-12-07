@@ -18,7 +18,7 @@
         <p>BookSmart is your one stop shopping website. To proceed, please log in or create an account.</p>
         <div style="color: red;">
             <p th:if="${emailSent}">* An email has been sent to the email address you just registered.</p>
-            <p th:if="${noAccount}">* No account found! Please register.</p>
+            <p th:if="${param.error != null}">Incorrect username or password.</p>
         </div>
         <div class="form">
             <form th:action="@{/login}" method="post">
