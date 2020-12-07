@@ -41,12 +41,14 @@
                         </li>
                         <li class="navbar-item" th:classappend="${isLoginActive}? 'active'">
                             <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="nav-link">Logout</a>
-                            <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="nav-link">Login</a>
+                            <a sec:authorize="isAnonymous()" th:href="@{/login}" class="nav-link">Login</a>
                         </li>
                     </ul>
                     <div class="cart my-2 my-lg-0">
-                        <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                        <span class="quantity">3</span>
+                        <a th:href="@{/shoppingCart/cart}">
+                            <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                            <span class="quantity">3</span>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -84,7 +86,7 @@
                 <div class="navigation">
                     <h4>Help</h4>
                     <ul>
-                        <li><a th:href="@{/terms-conditions}">Terms and Conditions</a></li>
+                        <li><a th:href="@{/termsConditions}">Terms and Conditions</a></li>
                         <li><a th:href="@{/return}">Shipping & Returns</a></li>
                         <li><a th:href="@{/faq}">FAQ’s</a></li>
                     </ul>
@@ -105,7 +107,8 @@
                             <div class="col-md-12">
                                 <textarea placeholder="Message" required></textarea>
                             </div>
-                            <h6 class="col-md-12" style="display:none;color:red" id="contact-confirmation">Thank you! We'll be in touch.</h6>
+                            <h6 class="col-md-12" style="display:none;color:red" id="contact-confirmation">Thank you!
+                                We'll be in touch.</h6>
                             <div class="col-md-12">
                                 <button class="btn black">Submit</button>
                             </div>

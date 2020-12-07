@@ -1,5 +1,6 @@
 package com.booksmart.service.impl;
 
+import com.booksmart.entity.Role;
 import com.booksmart.entity.User;
 import com.booksmart.repository.RoleRepository;
 import com.booksmart.repository.UserRepository;
@@ -9,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,12 +42,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
+    public User createUser(User user, Set<Role> roles) {
         User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
             LOG.info("User {} already exists!", user.getUsername());
         } else {
+            for (Role role : roles) {
+                roleRepository.save(role);
+            }
+
+            user.getRoles().addAll(roles);
+
             localUser = save(user);
         }
 

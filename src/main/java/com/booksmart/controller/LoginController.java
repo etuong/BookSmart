@@ -1,5 +1,6 @@
 package com.booksmart.controller;
 
+import com.booksmart.entity.Role;
 import com.booksmart.entity.User;
 import com.booksmart.service.SecurityService;
 import com.booksmart.service.UserService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class LoginController {
@@ -64,11 +67,17 @@ public class LoginController {
             return "register";
         }
 
+        Set<Role> roles = new HashSet<>();
+        Role role = new Role();
+        role.setId(1L);
+        role.setName("ROLE_USER");
+        roles.add(role);
+
         User user = new User();
         user.setUsername(username);
         user.setEmail(userEmail);
         user.setPassword(password);
-        userService.createUser(user);
+        userService.createUser(user, roles);
 
         securityService.autoLogin(user.getUsername(), user.getPassword());
 

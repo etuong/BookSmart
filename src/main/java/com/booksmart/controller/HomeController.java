@@ -7,9 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
-
 @Controller
 public class HomeController {
     @Autowired
@@ -57,13 +54,13 @@ public class HomeController {
         return "shop";
     }
 
-    @RequestMapping("/terms-conditions")
+    @RequestMapping("/termsConditions")
     public String termsConditions() {
-        return "terms-conditions";
+        return "termsConditions";
     }
 
-    @RequestMapping("/checkout")
-    public String checkout() {
-        return "checkout";
+    @RequestMapping("/403")
+    public String forbiddenAccess() {
+        return "403";
     }
 }

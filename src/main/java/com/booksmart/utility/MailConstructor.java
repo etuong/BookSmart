@@ -11,9 +11,6 @@ import java.util.Properties;
 
 @Component
 public class MailConstructor {
-    @Autowired
-    private TemplateEngine templateEngine;
-
     public static void sendMail(String to, String subject, String body, boolean bodyIsHTML) throws MessagingException {
 
         String from = "ethanator360@yahoo.com";
