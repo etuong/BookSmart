@@ -66,23 +66,4 @@ public class HomeController {
     public String checkout() {
         return "checkout";
     }
-
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public String login(
-//            HttpServletRequest request,
-//            @ModelAttribute("password") String password,
-//            @ModelAttribute("username") String username,
-//            Model model) {
-//
-//        User user = userService.findByUsername(username);
-//        if (user == null || !user.getPassword().equals(password)) {
-//            model.addAttribute("noAccount", true);
-//            return "login";
-//        }
-//
-//        model.addAttribute("hasLoggedIn", user.isHasLoggedIn());
-//        return "index";
-//    }
-
-
 }

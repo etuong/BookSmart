@@ -1,6 +1,7 @@
 package com.booksmart.controller;
 
 import com.booksmart.entity.User;
+import com.booksmart.service.SecurityService;
 import com.booksmart.service.UserService;
 import com.booksmart.utility.MailConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private SecurityService securityService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("isLoginActive", true);
@@ -28,14 +32,12 @@ public class LoginController {
     public String loggedIn(HttpServletRequest request, Model model) {
         Principal principal = request.getUserPrincipal();
         System.out.println(principal.getName());
-        model.addAttribute("hasLoggedIn", true);
         model.addAttribute("isHomeActive", true);
         return "index";
     }
 
     @RequestMapping("/loggedOut")
     public String loggedOut(Model model) {
-        model.addAttribute("hasLoggedIn", false);
         model.addAttribute("isHomeActive", true);
         return "index";
     }
@@ -67,6 +69,8 @@ public class LoginController {
         user.setEmail(userEmail);
         user.setPassword(password);
         userService.createUser(user);
+
+        securityService.autoLogin(user.getUsername(), user.getPassword());
 
         StringBuilder messageBuilder = new StringBuilder();
         messageBuilder.append("Thank you for registering to BookSmart\r\n");
