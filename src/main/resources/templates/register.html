@@ -20,8 +20,8 @@
         <p>To create an account please fill out the following fields.</p>
         <div style="color: red;">
             <p id="invalidatedPasswords"></p>
-            <p th:if="${usernameExists}">* Username already exits. Choose a different one.</p>
-            <p th:if="${emailExists}">* Email already exits. Choose a different one.</p>
+            <p th:if="${usernameExists}">* Username already exists. Please choose a different one.</p>
+            <p th:if="${emailExists}">* Email already exists. Please choose a different one.</p>
         </div>
         <div class="form">
             <form th:action="@{/newUser}" method="post" onsubmit="return checkPasswords(this)">

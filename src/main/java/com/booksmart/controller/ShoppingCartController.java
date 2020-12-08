@@ -16,7 +16,9 @@ public class ShoppingCartController {
 
     @RequestMapping("/cart")
     public String shoppingCart(Model model, Principal principal) {
-        model.addAttribute("user", principal.getName());
+        if (principal != null) {
+            model.addAttribute("username", principal.getName());
+        }
         return "shoppingCart";
     }
 }

@@ -32,9 +32,7 @@ public class LoginController {
     }
 
     @RequestMapping("/loggedIn")
-    public String loggedIn(HttpServletRequest request, Model model) {
-        Principal principal = request.getUserPrincipal();
-        System.out.println(principal.getName());
+    public String loggedIn(Model model) {
         model.addAttribute("isHomeActive", true);
         return "index";
     }
@@ -78,8 +76,6 @@ public class LoginController {
         user.setEmail(userEmail);
         user.setPassword(password);
         userService.createUser(user, roles);
-
-        securityService.autoLogin(user.getUsername(), user.getPassword());
 
         StringBuilder messageBuilder = new StringBuilder();
         messageBuilder.append("Thank you for registering to BookSmart\r\n");
