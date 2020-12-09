@@ -27,7 +27,5 @@ public class Book {
     private double listPrice;
     private double ourPrice;
     private boolean active = true;
-    @Column(columnDefinition = "text")
     private String description;
-    private int inStockNumber;
 }

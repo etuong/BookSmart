@@ -26,12 +26,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    private static final String[] PUBLIC_MATCHERS = {
+            "/",
+            "/console/**",
+    };
+
+    private static final String[] PRIVATE_MATCHERS = {
+            "/checkout",
+            "/shoppingCart",
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/").permitAll().and()
-                .authorizeRequests().antMatchers("/console/**").permitAll().and()
-                .authorizeRequests().antMatchers("/checkout").access("hasAnyRole('ROLE_USER')").and()
+                .authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().and()
+                .authorizeRequests().antMatchers(PRIVATE_MATCHERS).access("hasAnyRole('ROLE_USER')").and()
                 .csrf().disable()
                 .cors().disable()
                 .headers().frameOptions().disable().and()

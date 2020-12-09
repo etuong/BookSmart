@@ -33,9 +33,9 @@ public class HomeController {
         return "faq";
     }
 
-    @RequestMapping("/product")
-    public String product() {
-        return "product";
+    @RequestMapping("/book")
+    public String book() {
+        return "book";
     }
 
     @RequestMapping("/register")

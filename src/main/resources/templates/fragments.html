@@ -45,7 +45,7 @@
                         </li>
                     </ul>
                     <div class="cart my-2 my-lg-0">
-                        <a th:href="@{/shoppingCart/cart}">
+                        <a sec:authorize="isAuthenticated()" th:href="@{/shoppingCart}">
                             <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
                             <span class="quantity">3</span>
                         </a>

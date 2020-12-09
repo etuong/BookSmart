@@ -18,12 +18,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, updatable = false)
     Long id;
+
     @Column(nullable = false, unique = true)
     String username;
+
     String password;
+
     @Column(name = "email", nullable = false, updatable = false)
     String email;
 
     @ManyToMany
     private Set<Role> roles = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private ShoppingCart shoppingCart;
 }

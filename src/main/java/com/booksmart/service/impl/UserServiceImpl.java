@@ -1,6 +1,7 @@
 package com.booksmart.service.impl;
 
 import com.booksmart.entity.Role;
+import com.booksmart.entity.ShoppingCart;
 import com.booksmart.entity.User;
 import com.booksmart.repository.RoleRepository;
 import com.booksmart.repository.UserRepository;
@@ -53,6 +54,10 @@ public class UserServiceImpl implements UserService {
             }
 
             user.getRoles().addAll(roles);
+
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setUser(user);
+            user.setShoppingCart(shoppingCart);
 
             localUser = save(user);
         }

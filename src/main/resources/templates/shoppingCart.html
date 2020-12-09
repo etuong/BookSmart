@@ -17,81 +17,78 @@
 <section class="static about-sec">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" th:if="${isEmpty}">
+                <h3>Your cart is empty!</h3>
+            </div>
+            <div class="col-12" th:if="${!isEmpty}">
                 <div class="row">
                     <div class="col-6 text-left">
-                        <h3 th:text="${username}? 'Hello, ' + ${#strings.toUpperCase(username)} : 'All Books'"></h3>
+                        <h3 th:text="'Hello, ' + ${#strings.toUpperCase(username)}"></h3>
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="col-6 text-right" th:if="${cart != null && cartItemList.length > 0}">
                         <a class="btn btn-warning" th:href="@{/shop}">Continue Shopping</a>
                         <a class="btn btn-primary" th:href="@{/checkout}">CheckOut</a>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-8">
-                        <h6 style="margin-left: 70px;">Products</h6>
+                <div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h6 style="margin-left: 70px;">Products</h6>
+                        </div>
+                        <div class="col-2">
+                            <h6>Price</h6>
+                        </div>
+                        <div class="col-2">
+                            <h6>Qty</h6>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <h6>Price</h6>
-                    </div>
-                    <div class="col-2">
-                        <h6>Qty</h6>
-                    </div>
-                </div>
-                <div th:each="cartItem : ${cartItemList}">
-                    <form th:action="@{/shoppingCart/updateCartItem}" method="post">
-                        <hr/>
-                        <div class="form-row">
-                            <div class="form-group col-2">
-                                <a th:href="@{bookDetail(id=${cartItem.book.id})}">
-                                    <img class="img-fluid shelf-book mx-auto" style="width: 70px;"
-                                         th:src="#{adminPath}+@{/image/book/}+${cartItem.book.id}+'.png'"/>
-                                </a>
-                            </div>
+                    <div th:each="cartItem : ${cartItemList}">
+                        <form th:action="@{/shoppingCart/updateCartItem}" method="post">
+                            <hr/>
+                            <div class="form-row">
+                                <div class="form-group col-2">
+                                    <a th:href="@{bookDetail(id=${cartItem.book.id})}">
+                                        <img class="img-fluid shelf-book mx-auto" style="width: 70px;"
+                                             th:src="#{adminPath}+@{/image/book/}+${cartItem.book.id}+'.png'"/>
+                                    </a>
+                                </div>
 
-                            <div class="form-group col-6">
-                                <div style="margin-left: 50px;">
-                                    <a th:href="@{/bookDetail?id=}+${cartItem.book.id}"><h4
-                                            th:text="${cartItem.book.title}"></h4></a>
-                                    <p th:if="${cartItem.book.inStockNumber&gt;10}" style="color: green;">In Stock</p>
-                                    <p th:if="${cartItem.book.inStockNumber&lt;10} and ${cartItem.book.inStockNumber&gt;0}"
-                                       style="color: green;">Only <span th:text="${cartItem.book.inStockNumber}"></span>
-                                        In
-                                        Stock</p>
-                                    <p th:if="${cartItem.book.inStockNumber==0}" style="color: darkred;">Product
-                                        Unavailable</p>
-                                    <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">delete</a>
+                                <div class="form-group col-6">
+                                    <div style="margin-left: 50px;">
+                                        <a th:href="@{/bookDetail?id=}+${cartItem.book.id}">
+                                            <h4 th:text="${cartItem.book.title}"></h4>
+                                        </a>
+                                        <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Delete</a>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-2">
+                                    <h5 style="color: #db3208; font-size: large;">$<span
+                                            th:text="${cartItem.book.ourPrice}"></span></h5>
+                                </div>
+
+                                <div class="form-group col-2">
+                                    <input hidden="hidden" name="id" th:value="${cartItem.id}"/>
+                                    <input th:id="${cartItem.id}" th:name="qty"
+                                           class="form-control cartItemQty" th:value="${cartItem.qty}"/>
+                                    <button style="display: none;" th:id="'update-item-'+${cartItem.id}" type="submit"
+                                            class="btn btn-warning btn-xs">Update
+                                    </button>
                                 </div>
                             </div>
+                        </form>
+                    </div>
 
-                            <div class="form-group col-2">
-                                <h5 style="color: #db3208; font-size: large;">$<span th:text="${cartItem.book.ourPrice}"
-                                                                                     th:style="${cartItem.book.inStockNumber}==0? 'text-decoration : line-through' : ''">
-                            </span>
-                                </h5>
-                            </div>
+                    <hr/>
 
-                            <div class="form-group col-2">
-                                <input hidden="hidden" name="id" th:value="${cartItem.id}"/>
-                                <input th:id="${cartItem.id}" th:name="qty"
-                                       th:disabled="${cartItem.book.inStockNumber==0}"
-                                       class="form-control cartItemQty" th:value="${cartItem.qty}"/>
-                                <button style="display: none;" th:id="'update-item-'+${cartItem.id}" type="submit"
-                                        class="btn btn-warning btn-xs">Update
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <hr/>
-
-                <div class="row">
-                    <h4 class="col-12 text-right"><strong style="font-size: large;">Total Price (<!--<span
-                        th:text="${#lists.size(cartItemList)}"></span>--> 3 items): </strong><span
-                            style="color: #db3208; font-size: large;">$1<!--<span
-                        th:text="${shoppingCart.grandTotal}"></span>--></span>
-                    </h4>
+                    <div class="row">
+                        <h4 class="col-12 text-right">
+                            <strong style="font-size: large;">Total Price (
+                                <span th:text="${#lists.size(cartItemList)}"></span> items): </strong>
+                            <span style="color: #db3208; font-size: large;">$
+                                <span th:text="${cart.grandTotal}"></span></span>
+                        </h4>
+                    </div>
                 </div>
             </div>
         </div>
