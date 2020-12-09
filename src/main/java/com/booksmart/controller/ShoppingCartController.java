@@ -31,7 +31,6 @@ public class ShoppingCartController {
 
     @GetMapping()
     public String shoppingCart(Model model, Principal principal) {
-
         User user = userService.findByUsername(principal.getName());
         ShoppingCart shoppingCart = user.getShoppingCart();
 
@@ -55,13 +54,13 @@ public class ShoppingCartController {
         cartItem.setQuantity(qty);
         cartItemService.updateCartItem(cartItem);
 
-        return "forward:/shoppingCart/cart";
+        return "forward:/shoppingCart";
     }
 
     @RequestMapping("/removeItem")
     public String removeItem(@RequestParam("id") Long id) {
         cartItemService.removeCartItem(cartItemService.findById(id));
 
-        return "forward:/shoppingCart/cart";
+        return "forward:/shoppingCart";
     }
 }

@@ -25,7 +25,7 @@
                     <div class="col-6 text-left">
                         <h3 th:text="'Hello, ' + ${#strings.toUpperCase(username)}"></h3>
                     </div>
-                    <div class="col-6 text-right" th:if="${cart != null && cartItemList.length > 0}">
+                    <div class="col-6 text-right">
                         <a class="btn btn-warning" th:href="@{/shop}">Continue Shopping</a>
                         <a class="btn btn-primary" th:href="@{/checkout}">CheckOut</a>
                     </div>
@@ -39,7 +39,7 @@
                             <h6>Price</h6>
                         </div>
                         <div class="col-2">
-                            <h6>Qty</h6>
+                            <h6>Quantity</h6>
                         </div>
                     </div>
                     <div th:each="cartItem : ${cartItemList}">
@@ -47,7 +47,7 @@
                             <hr/>
                             <div class="form-row">
                                 <div class="form-group col-2">
-                                    <a th:href="@{bookDetail(id=${cartItem.book.id})}">
+                                    <a th:href="@{book(id=${cartItem.book.id})}">
                                         <img class="img-fluid shelf-book mx-auto" style="width: 70px;"
                                              th:src="#{adminPath}+@{/image/book/}+${cartItem.book.id}+'.png'"/>
                                     </a>
@@ -55,7 +55,7 @@
 
                                 <div class="form-group col-6">
                                     <div style="margin-left: 50px;">
-                                        <a th:href="@{/bookDetail?id=}+${cartItem.book.id}">
+                                        <a th:href="@{/book?id=}+${cartItem.book.id}">
                                             <h4 th:text="${cartItem.book.title}"></h4>
                                         </a>
                                         <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Delete</a>

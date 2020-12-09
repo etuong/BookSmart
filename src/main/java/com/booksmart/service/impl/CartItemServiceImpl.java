@@ -16,9 +16,6 @@ public class CartItemServiceImpl implements CartItemService {
     @Autowired
     private CartItemRepository cartItemRepository;
 
-//    @Autowired
-//    private BookToCartItemRepository bookToCartItemRepository;
-
     public List<CartItem> findByShoppingCart(ShoppingCart shoppingCart) {
         return cartItemRepository.findByShoppingCart(shoppingCart);
     }
@@ -54,11 +51,6 @@ public class CartItemServiceImpl implements CartItemService {
         cartItem.setSubtotal(new BigDecimal(book.getOurPrice()).multiply(new BigDecimal(qty)));
         cartItem = cartItemRepository.save(cartItem);
 
-//        BookToCartItem bookToCartItem = new BookToCartItem();
-//        bookToCartItem.setBook(book);
-//        bookToCartItem.setCartItem(cartItem);
-//        bookToCartItemRepository.save(bookToCartItem);
-
         return cartItem;
     }
 
@@ -67,7 +59,6 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     public void removeCartItem(CartItem cartItem) {
-//        bookToCartItemRepository.deleteByCartItem(cartItem);
         cartItemRepository.delete(cartItem);
     }
 
