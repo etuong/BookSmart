@@ -55,8 +55,7 @@ public class UserServiceImpl implements UserService {
 
             user.getRoles().addAll(roles);
 
-            ShoppingCart shoppingCart = new ShoppingCart();
-            shoppingCart.setUser(user);
+            ShoppingCart shoppingCart = ShoppingCart.builder().user(user).build();
             user.setShoppingCart(shoppingCart);
 
             localUser = save(user);

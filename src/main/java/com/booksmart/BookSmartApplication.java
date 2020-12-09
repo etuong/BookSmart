@@ -22,10 +22,7 @@ public class BookSmartApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User();
-        user.setUsername("q");
-        user.setPassword("q");
-        user.setEmail("noreply@gmail.com");
+        User user = User.builder().username("q").password("q").email("noreply@gmail.com").build();
         Set<Role> roles = new HashSet<>();
         Role role = new Role();
         role.setId(1L);
