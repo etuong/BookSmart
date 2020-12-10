@@ -1,8 +1,6 @@
 package com.booksmart.utility;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.thymeleaf.TemplateEngine;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

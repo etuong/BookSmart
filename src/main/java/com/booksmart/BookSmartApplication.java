@@ -1,20 +1,16 @@
 package com.booksmart;
 
-import com.booksmart.entity.Role;
-import com.booksmart.entity.User;
-import com.booksmart.service.UserService;
+import com.booksmart.utility.Seeder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @SpringBootApplication
 public class BookSmartApplication implements CommandLineRunner {
+
     @Autowired
-    private UserService userService;
+    private Seeder seeder;
 
     public static void main(String[] args) {
         SpringApplication.run(BookSmartApplication.class, args);
@@ -22,13 +18,7 @@ public class BookSmartApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = User.builder().username("q").password("q").email("noreply@gmail.com").build();
-        Set<Role> roles = new HashSet<>();
-        Role role = new Role();
-        role.setId(1L);
-        role.setName("ROLE_USER");
-        roles.add(role);
-
-        userService.createUser(user, roles);
+        seeder.seedUsers();
+        seeder.seedBooks();
     }
 }

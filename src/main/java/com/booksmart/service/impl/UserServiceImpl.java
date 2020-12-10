@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -53,6 +54,7 @@ public class UserServiceImpl implements UserService {
                 roleRepository.save(role);
             }
 
+            user.setRoles(new HashSet<>());
             user.getRoles().addAll(roles);
 
             ShoppingCart shoppingCart = ShoppingCart.builder().user(user).build();
