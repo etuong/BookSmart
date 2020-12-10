@@ -77,7 +77,7 @@
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-4" th:each="book : ${books}">
                 <div class="item">
-                    <a th:href="@{/book}">
+                    <a th:href="@{/book?id=}+${book.id}">
                         <img th:src="@{/images/book}+${book.id}+'.jpg'" alt="img">
                         <h3><span th:text="${book.title}"></span></h3>
                     </a>

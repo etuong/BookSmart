@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.websocket.server.PathParam;
 import java.util.Collections;
 import java.util.List;
+
+import static com.booksmart.utility.Constants.QUANTITY_LIST;
 
 @Controller
 public class HomeController {
@@ -25,7 +28,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        List<Book> books = bookService.findAll().subList(0, 10);
+        List<Book> books = bookService.findAll().subList(10, 20);
         Collections.shuffle(books);
         model.addAttribute("books", books);
         model.addAttribute("isHomeActive", true);
@@ -45,7 +48,15 @@ public class HomeController {
     }
 
     @RequestMapping("/book")
-    public String book() {
+    public String book(@PathParam("id") Long id, Model model) {
+
+        Book book = bookService.findOne(id);
+
+        model.addAttribute("book", book);
+
+        model.addAttribute("qtyList", QUANTITY_LIST);
+        model.addAttribute("qty", 1);
+
         return "book";
     }
 

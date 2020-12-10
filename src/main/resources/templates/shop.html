@@ -19,9 +19,9 @@
         <h2>Our Bestseller Books</h2>
         <div class="recent-book-sec">
             <div class="row">
-                <div class="col-md-3" th:each="book : ${books}">
+                <div class="col-md-3 bookBox moreBox" th:each="book : ${books}" style="display: none;">
                     <div class="item">
-                        <a th:href="@{/book}">
+                        <a th:href="@{/book?id=}+${book.id}">
                             <img th:src="@{/images/book}+${book.id}+'.jpg'" alt="img">
                             <h3><span th:text="${book.title}"></span></h3>
                         </a>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-sec">
+            <div class="btn-sec" id="loadMore">
                 <button class="btn gray-btn">Load More Books</button>
             </div>
         </div>

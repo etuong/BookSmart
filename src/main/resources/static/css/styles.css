@@ -1219,6 +1219,7 @@ header .cart .quantity {
 
 .product-sec {
 	margin-bottom: 100px;
+	min-height: 540px;
 }
 
 .product-sec h1 {
@@ -1267,15 +1268,13 @@ header .cart .quantity {
 }
 
 .product-sec .carousel-inner {
-	width: 360px;
-	float: left;
 	margin-right: 15px;
 }
 
 .product-sec .slider-sec {
 	-webkit-box-flex: 0;
 	-ms-flex: 0 0 520px;
-	flex: 0 0 520px;
+	flex: 0 0 450px;
 	max-width: 520px;
 }
 
@@ -1288,8 +1287,7 @@ header .cart .quantity {
 
 .product-sec .slider-content ul {
 	list-style: none;
-	width: 320px;
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 	float: left;
 }
 
@@ -1300,14 +1298,14 @@ header .cart .quantity {
 }
 
 .product-sec .slider-content ul li span {
-	width: 180px;
-	font-weight: 300;
 	display: inline-block;
-	float: left;
+}
+
+.product-sec .slider-content ul li .name {
+	width: 100px;
 }
 
 .product-sec .slider-content ul li span.price {
-	padding-left: 20px;
 	font-weight: 600;
 	text-decoration: line-through;
 	width: 100px;
@@ -1321,11 +1319,11 @@ header .cart .quantity {
 }
 
 .product-sec .slider-content ul li span.clm {
-	width: 5px;
+	width: 25px;
 }
 
 .product-sec .slider-content ul li span.save-cost {
-	text-align: right;
+	display: flex;
 	width: 100%;
 	font-weight: 600;
 	font-style: italic;

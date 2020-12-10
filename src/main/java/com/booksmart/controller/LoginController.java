@@ -25,15 +25,19 @@ public class LoginController {
     private SecurityService securityService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model) {
+    public String login(HttpServletRequest request, Model model) {
+        String referrer = request.getHeader("Referer");
+        String endpoint = referrer.substring(referrer.lastIndexOf("/"), referrer.length());
+        request.getSession().setAttribute("url_prior_login", endpoint);
         model.addAttribute("isLoginActive", true);
         return "login";
     }
 
     @RequestMapping("/loggedIn")
-    public String loggedIn(Model model) {
+    public String loggedIn(HttpServletRequest request, Model model) {
+        String prevUrl = (String)request.getSession().getAttribute("url_prior_login");
         model.addAttribute("isHomeActive", true);
-        return "redirect:/";
+        return "forward:" + prevUrl;
     }
 
     @RequestMapping("/loggedOut")
