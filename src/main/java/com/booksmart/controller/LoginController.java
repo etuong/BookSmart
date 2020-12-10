@@ -33,13 +33,13 @@ public class LoginController {
     @RequestMapping("/loggedIn")
     public String loggedIn(Model model) {
         model.addAttribute("isHomeActive", true);
-        return "index";
+        return "redirect:/";
     }
 
     @RequestMapping("/loggedOut")
     public String loggedOut(Model model) {
         model.addAttribute("isHomeActive", true);
-        return "index";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/newUser", method = RequestMethod.POST)

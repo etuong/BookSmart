@@ -21,4 +21,8 @@ public class BookServiceImpl implements BookService {
     public Book findOne(Long id) {
         return bookRepository.findById(id).get();
     }
+
+    public Book save(Book book) {
+        return bookRepository.save(book);
+    }
 }
