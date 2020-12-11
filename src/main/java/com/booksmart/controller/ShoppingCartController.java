@@ -65,7 +65,7 @@ public class ShoppingCartController {
         int cartLength = cartItemService.getNumberOfCartItems(user);
         session.setAttribute("cartLength", cartLength);
 
-        return "forward:/shop";
+        return "shop";
     }
 
     @RequestMapping("/addItem")

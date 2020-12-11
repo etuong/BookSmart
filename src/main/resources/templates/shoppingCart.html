@@ -48,7 +48,7 @@
                             <div class="form-row">
                                 <div class="form-group col-2">
                                     <a th:href="@{book(id=${cartItem.book.id})}">
-
+                                        <img class="img-fluid" th:src="@{/images/book}+${cartItem.book.id}+'.jpg'"/>
                                     </a>
                                 </div>
 
@@ -71,8 +71,7 @@
                                     <div style="display:flex">
                                         <input th:name="quantity" class="form-control cartItemQty"
                                                th:value="${cartItem.quantity}"/>
-                                        <button style="display: none;" type="submit"
-                                                class="btn btn-warning btn-xs">Update</button>
+                                        <button type="submit" class="btn-warning btn-xs">Update</button>
                                     </div>
                                 </div>
                             </div>
