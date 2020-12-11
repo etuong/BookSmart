@@ -49,7 +49,6 @@ public class HomeController {
 
     @RequestMapping("/book")
     public String book(@PathParam("id") Long id, Model model) {
-
         Book book = bookService.findOne(id);
 
         model.addAttribute("book", book);

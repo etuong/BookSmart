@@ -31,13 +31,13 @@ public class CartItemServiceImpl implements CartItemService {
         return cartItem;
     }
 
-    public CartItem addBookToCartItem(Book book, User user, int qty) {
+    public CartItem addBookToCartItem(Book book, User user, int quantity) {
         List<CartItem> cartItemList = findByShoppingCart(user.getShoppingCart());
 
         for (CartItem cartItem : cartItemList) {
             if (book.getId() == cartItem.getBook().getId()) {
-                cartItem.setQuantity(cartItem.getQuantity() + qty);
-                cartItem.setSubtotal(new BigDecimal(book.getOurPrice()).multiply(new BigDecimal(qty)));
+                cartItem.setQuantity(cartItem.getQuantity() + quantity);
+                cartItem.setSubtotal(new BigDecimal(book.getOurPrice()).multiply(new BigDecimal(quantity)));
                 cartItemRepository.save(cartItem);
                 return cartItem;
             }
@@ -46,9 +46,8 @@ public class CartItemServiceImpl implements CartItemService {
         CartItem cartItem = new CartItem();
         cartItem.setShoppingCart(user.getShoppingCart());
         cartItem.setBook(book);
-
-        cartItem.setQuantity(qty);
-        cartItem.setSubtotal(new BigDecimal(book.getOurPrice()).multiply(new BigDecimal(qty)));
+        cartItem.setQuantity(quantity);
+        cartItem.setSubtotal(new BigDecimal(book.getOurPrice()).multiply(new BigDecimal(quantity)));
         cartItem = cartItemRepository.save(cartItem);
 
         return cartItem;
@@ -68,5 +67,10 @@ public class CartItemServiceImpl implements CartItemService {
 
     public List<CartItem> findByOrder(Order order) {
         return cartItemRepository.findByOrder(order);
+    }
+
+    public int getNumberOfCartItems(User user) {
+        List<CartItem> cartItemList = findByShoppingCart(user.getShoppingCart());
+        return cartItemList.size();
     }
 }

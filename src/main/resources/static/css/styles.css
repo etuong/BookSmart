@@ -232,13 +232,17 @@ header .cart .quantity {
 	position: absolute;
 	top: -3px;
 	right: 0;
-	background: red;
+	background: transparent;
 	width: 15px;
 	height: 15px;
 	border-radius: 50%;
 	text-align: center;
 	color: #fff;
 	padding: 1px 0;
+}
+
+header .cart .nonEmpty {
+    background: red;
 }
 
 .slider {

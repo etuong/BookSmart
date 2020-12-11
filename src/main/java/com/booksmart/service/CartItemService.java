@@ -18,4 +18,6 @@ public interface CartItemService {
     CartItem save(CartItem cartItem);
 
     List<CartItem> findByOrder(Order order);
+
+    int getNumberOfCartItems(User user);
 }

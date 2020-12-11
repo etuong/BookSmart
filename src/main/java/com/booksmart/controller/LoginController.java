@@ -36,7 +36,6 @@ public class LoginController {
     @RequestMapping("/loggedIn")
     public String loggedIn(HttpServletRequest request, Model model) {
         String prevUrl = (String)request.getSession().getAttribute("url_prior_login");
-        model.addAttribute("isHomeActive", true);
         return "forward:" + prevUrl;
     }
 

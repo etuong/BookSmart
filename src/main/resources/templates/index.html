@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments :: common-header"/>
 
@@ -81,8 +81,10 @@
                         <img th:src="@{/images/book}+${book.id}+'.jpg'" alt="img">
                         <h3><span th:text="${book.title}"></span></h3>
                     </a>
-                    <h6><span class="price">$<span th:text="${book.ourPrice}"></span></span> / <a
-                            th:href="@{/book}">Add To Cart</a></h6>
+                    <h6><span class="price">$<span th:text="${book.ourPrice}"></span></span> /
+                        <a sec:authorize="isAuthenticated()" th:href="@{shoppingCart/addSingleItem?bookId=}+${book.id}">Add
+                            To Cart</a>
+                        <span sec:authorize="isAnonymous()">On Sale!</span></h6>
                 </div>
             </div>
         </div>
@@ -185,6 +187,7 @@ $(document).ready(function () {
     loop: true,
   });
 });
+
 
 </script>
 </body>

@@ -47,7 +47,8 @@
                     <div class="cart my-2 my-lg-0">
                         <a sec:authorize="isAuthenticated()" th:href="@{/shoppingCart}">
                             <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                            <span class="quantity">3</span>
+                            <span class="quantity" th:text="${session.cartLength}"
+                                  th:classappend="${session.cartLength > 0}? 'nonEmpty'"/>
                         </a>
                     </div>
                 </div>

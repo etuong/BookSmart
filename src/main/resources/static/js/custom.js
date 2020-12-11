@@ -17,7 +17,7 @@ function checkPasswords(form) {
     }
 }
 
-$( document ).ready(function () {
+$(document).ready(function () {
     $(".moreBox").slice(0, 10).show();
     if ($(".bookBox:hidden").length != 0) {
         $("#loadMore").show();
