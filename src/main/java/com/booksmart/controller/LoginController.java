@@ -2,6 +2,7 @@ package com.booksmart.controller;
 
 import com.booksmart.entity.Role;
 import com.booksmart.entity.User;
+import com.booksmart.service.CartItemService;
 import com.booksmart.service.SecurityService;
 import com.booksmart.service.UserService;
 import com.booksmart.utility.MailConstructor;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +27,9 @@ public class LoginController {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private CartItemService cartItemService;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(HttpServletRequest request, Model model) {
         String referrer = request.getHeader("Referer");
@@ -34,8 +40,12 @@ public class LoginController {
     }
 
     @RequestMapping("/loggedIn")
-    public String loggedIn(HttpServletRequest request, Model model) {
-        String prevUrl = (String)request.getSession().getAttribute("url_prior_login");
+    public String loggedIn(HttpServletRequest request, Principal principal, Model model) {
+        HttpSession session = request.getSession();
+        User user = userService.findByUsername(principal.getName());
+        int cartLength = cartItemService.getNumberOfCartItems(user);
+        session.setAttribute("cartLength", cartLength);
+        String prevUrl = (String) session.getAttribute("url_prior_login");
         return "forward:" + prevUrl;
     }
 
