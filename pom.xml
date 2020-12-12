@@ -12,6 +12,7 @@
     <groupId>com.booksmart</groupId>
     <artifactId>BookSmart</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>BookSmart</name>
     <description>JHU 605.681 e-Commerce Project</description>
 
@@ -25,6 +26,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

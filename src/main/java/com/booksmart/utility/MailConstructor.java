@@ -11,7 +11,7 @@ import java.util.Properties;
 public class MailConstructor {
     public static void sendMail(String to, String subject, String body, boolean bodyIsHTML) throws MessagingException {
 
-        String from = "ethanator360@yahoo.com";
+        String from = "";
 
         // 1 - Get a mail session
         Properties properties = new Properties();
@@ -40,7 +40,7 @@ public class MailConstructor {
 
         // 4 - Send the message
         Transport transport = session.getTransport();
-        transport.connect(from, "esauttqiicousamo");
+        transport.connect(from, "");
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
     }
