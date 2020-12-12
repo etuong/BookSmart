@@ -1035,6 +1035,45 @@ header .cart .nonEmpty {
 	width: 100%;
 }
 
+.footer-menu {
+	display: inline-flex;
+	margin-top: 15px;
+}
+
+.redBtn {
+	color: white;
+	background: red;
+}
+
+.greenBtn {
+	color: white;
+	background: green;
+}
+
+#errorMessages {
+	color: red;
+	font-style: italic;
+	margin: 10px 0px;
+}
+
+.payment {
+	margin: 10px auto;
+}
+
+.one {
+	width: 170px;
+	float: left;
+}
+
+.two input[type=radio] {
+    margin-right: 5px;
+}
+
+.two label {
+    font-size: 15px;
+}
+
+
 .static h1 {
 	font-size: 30px;
 	font-weight: 500;

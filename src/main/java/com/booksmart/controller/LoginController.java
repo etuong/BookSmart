@@ -92,7 +92,7 @@ public class LoginController {
         StringBuilder messageBuilder = new StringBuilder();
         messageBuilder.append("Thank you for registering to BookSmart\r\n");
         messageBuilder.append("Your Username is " + user.getUsername() + "\r\n");
-        messageBuilder.append("Your Password is " + user.getPassword() + "\r\n");
+        messageBuilder.append("Your Password is " + password + "\r\n");
         MailConstructor.sendMail(user.getEmail(), "BookSmart - New User", messageBuilder.toString(), false);
 
         model.addAttribute("emailSent", true);

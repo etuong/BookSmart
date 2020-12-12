@@ -17,6 +17,28 @@ function checkPasswords(form) {
     }
 }
 
+function validatePaymentForm() {
+    let isValidated = true;
+    const errorMessages = document.getElementById("errorMessages");
+    errorMessages.innerHTML = "";
+    if (!document.getElementById("discover").checked
+            && !document.getElementById("master").checked
+            && !document.getElementById("visa").checked) {
+        errorMessages.innerHTML += "Please select a credit card type <br/>";
+        isValidated = false;
+    }
+    if (document.getElementById("number").value == "") {
+        errorMessages.innerHTML += "Please put in your credit card number <br/>";
+        isValidated = false;
+    }
+    if (document.getElementById("expiration").value == "") {
+        errorMessages.innerHTML += "Please put in your credit card's expiration date <br/>";
+        isValidated = false;
+    }
+
+    return isValidated;
+}
+
 $(document).ready(function () {
     $(".moreBox").slice(0, 10).show();
     if ($(".bookBox:hidden").length != 0) {
