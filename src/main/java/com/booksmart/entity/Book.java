@@ -19,6 +19,6 @@ public class Book {
     private String publisher;
     private double listPrice;
     private double ourPrice;
-    @Column(columnDefinition="text")
+    @Column(columnDefinition = "text")
     private String description;
 }
