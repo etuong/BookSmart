@@ -61,8 +61,7 @@ public class LoginController {
             @ModelAttribute("email") String userEmail,
             @ModelAttribute("password") String password,
             @ModelAttribute("username") String username,
-            Model model
-    ) throws Exception {
+            Model model) throws Exception {
         model.addAttribute("usernameExists", false);
         model.addAttribute("emailExists", false);
         model.addAttribute("emailSent", false);

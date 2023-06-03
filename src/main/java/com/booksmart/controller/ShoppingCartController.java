@@ -57,8 +57,7 @@ public class ShoppingCartController {
     public String addItem1(
             HttpSession session,
             @PathParam("bookId") Long bookId,
-            Principal principal
-    ) {
+            Principal principal) {
         User user = userService.findByUsername(principal.getName());
         Book book = bookService.findOne(bookId);
         cartItemService.addBookToCartItem(book, user, 1);
@@ -73,8 +72,7 @@ public class ShoppingCartController {
             HttpSession session,
             @ModelAttribute("book") Book book,
             @ModelAttribute("quantity") String quantity,
-            Model model, Principal principal
-    ) {
+            Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         book = bookService.findOne(book.getId());
         int qty = quantity != null ? Integer.parseInt(quantity) : 1;
@@ -89,8 +87,7 @@ public class ShoppingCartController {
     @RequestMapping("/updateCartItem")
     public String updateshoppingCart(
             @ModelAttribute("id") Long cartItemId,
-            @ModelAttribute("quantity") int quantity
-    ) {
+            @ModelAttribute("quantity") int quantity) {
         CartItem cartItem = cartItemService.findById(cartItemId);
         cartItem.setQuantity(quantity);
         cartItemService.updateCartItem(cartItem);

@@ -47,8 +47,7 @@ public class CheckoutController {
     @RequestMapping("/checkout")
     public String checkout(
             @RequestParam("id") Long cartId,
-            Model model, Principal principal
-    ) {
+            Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
 
         if (cartId != user.getShoppingCart().getId()) {

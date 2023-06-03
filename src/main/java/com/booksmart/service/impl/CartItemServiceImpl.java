@@ -1,6 +1,5 @@
 package com.booksmart.service.impl;
 
-
 import com.booksmart.entity.*;
 import com.booksmart.repository.CartItemRepository;
 import com.booksmart.service.CartItemService;
@@ -21,7 +20,8 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     public CartItem updateCartItem(CartItem cartItem) {
-        BigDecimal updatedSubtotal = new BigDecimal(cartItem.getBook().getOurPrice()).multiply(new BigDecimal(cartItem.getQuantity()));
+        BigDecimal updatedSubtotal = new BigDecimal(cartItem.getBook().getOurPrice())
+                .multiply(new BigDecimal(cartItem.getQuantity()));
 
         updatedSubtotal = updatedSubtotal.setScale(2, RoundingMode.HALF_UP);
         cartItem.setSubtotal(updatedSubtotal);
